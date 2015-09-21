@@ -13,9 +13,3 @@ Template.hello.events({
     Session.set('counter', Session.get('counter') + 1);
   }
 });
-}
-
-if (Meteor.isServer) {
-Meteor.startup(function () {
-  // code to run on server at startup
-});
