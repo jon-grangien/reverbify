@@ -9,3 +9,6 @@ autopublish
 insecure
 less
 nemo64:bootstrap
+cfs:standard-packages
+cfs:gridfs
+cfs:filesystem
