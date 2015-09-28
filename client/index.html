@@ -1,0 +1,27 @@
+<head>
+  <title>Reverbify</title>
+</head>
+
+<body>
+	<div class="col-sm-6">
+  	<h1>Welcome to Meteor!</h1>
+  </div>
+
+  <div class="col-sm-6">
+  	{{> hello}}
+  </div>
+
+  <div class="col-xs-4 col-xs-offset-4">
+  	{{> uploadTest}}
+  </div>
+</body>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="uploadTest">
+	<h3>Upload test</h3>
+	<input name="file" type="file" class="fileUploader">
+</template>
