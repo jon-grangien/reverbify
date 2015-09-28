@@ -1,4 +1,15 @@
 <template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+
+	{{#contentFor "headerTitle"}}
+    <h1 class="title">Hello</h1>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+
+		  <button>Click Me</button>
+		  <p>You've pressed the button {{counter}} times.</p>
+
+    {{/ionContent}}
+  {{/ionView}}
 </template>
