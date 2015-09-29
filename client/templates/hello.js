@@ -1,11 +1,13 @@
-Template.hello.helpers({
-  counter: function () {
-    return Session.get('counter');
-  }
-});
-
 Template.hello.events({
-  'click button': function () {
+  'click .continue-button': function () {
     Router.go('/convolve');
+  },
+
+  'click .use-existing-button': function () {
+    $('.continue-button').removeClass("disabled");
+  },
+
+  'click .record-button': function () {
+    $('.continue-button').removeClass("disabled");
   }
 });
