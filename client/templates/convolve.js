@@ -1,13 +1,12 @@
 Template.convolve.events({
-    'click .church-option': function () {
-        Router.go('/play');
-    },
+  'click .reverbify-button': function () {
+    Router.go('/play');
+  },
 
-    'click .k4-option': function () {
-        Router.go('/play');
-    },
+  'click .option': function (event, template) {
+    var target = event.target;
 
-    'click .chamber-option': function () {
-        Router.go('/play');
-    }
+    var environment = target.innerHTML;
+    alert('Chose ' + environment);
+  }
 });

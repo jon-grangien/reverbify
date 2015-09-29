@@ -12,16 +12,24 @@
     {{#ionContent}}
       <div class="col col-50 col-offset-25">
         <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle button-block" type="button" data-toggle="dropdown">Choose a reverb
+          <button class="btn btn-primary dropdown-toggle button-block" type="button" data-toggle="dropdown">Choose a
+            reverb
             <span class="caret"></span></button>
           <ul class="dropdown-menu">
-            <li class="church-option">Matteus Church</li>
-            <li class="k4-option">K4</li>
-            <li class="chamber-option">Old Chamber</li>
+            <li class="option">Matteus Church</li>
+            <li class="option">K4</li>
+            <li class="option" value="2">Old Chamber</li>
           </ul>
         </div>
       </div>
-      <!--<button>Reverbify</button> -->
+
+      <br><br>
+
+      <div class="col col-33 col-offset-33">
+        <button class="button button-assertive button-block reverbify-button">
+          Reverbify!
+        </button>
+      </div>
 
     {{/ionContent}}
   {{/ionView}}
