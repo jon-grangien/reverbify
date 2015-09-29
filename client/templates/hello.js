@@ -22,22 +22,15 @@ Template.hello.events({
       // Store signal buffer and load kernel
       var signalBuffer = audioBuffer;
 
-      Reverbify.loadAudio('/audio/default_kernel_K4.wav', function (didLoad, audioBuffer) {
-        if (!didLoad) {
-          alert('Loaded default signal but failed to load default kernel!');
-          return;
-        }
+      alert('Default audio signal loaded!');
 
-        alert('Default audio signal and kernel loaded!');
 
-        // Store signal and kernel in global object Reverbify
-        Reverbify.Audio = {}
-        Reverbify.Audio.signalBuffer = signalBuffer;
-        Reverbify.Audio.kernelBuffer = audioBuffer;
+      // Store signal and kernel in global object Reverbify
+      Reverbify.Audio = {};
+      Reverbify.Audio.signalBuffer = signalBuffer;
 
-        // Enable continuation
-        $('.continue-button').removeClass('disabled');
-      });
+      // Enable continuation
+      $('.continue-button').removeClass('disabled');
     });
 
   }
