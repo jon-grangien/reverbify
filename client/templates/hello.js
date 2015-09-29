@@ -6,6 +6,6 @@ Template.hello.helpers({
 
 Template.hello.events({
   'click button': function () {
-    Session.set('counter', Session.get('counter') + 1);
+    Router.go('/convolve');
   }
 });
