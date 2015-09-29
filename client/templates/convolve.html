@@ -25,11 +25,29 @@
 
       <br><br>
 
+    <div class="card hidden environment-card">
+      <div class="item">
+        <h2>{{env_title}}</h2>
+      </div>
+
+      <div class="item item-image">
+        <!--<img src="/images/env_image_default.jpg">-->
+        <img src={{env_image_src}}>
+      </div>
+
+      <div class="item">
+        <button class="button button-assertive button-block reverbify-button">
+          Reverbify!
+        </button>
+      </div>
+    </div>
+    <!--
       <div class="col col-33 col-offset-33">
         <button class="button button-assertive button-block reverbify-button">
           Reverbify!
         </button>
       </div>
+      -->
 
     {{/ionContent}}
   {{/ionView}}
