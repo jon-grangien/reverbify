@@ -35,7 +35,8 @@ Reverbify.loadAudio = function (path, onLoad) {
   xhr.send();
 };
 
-// Test the loadAudio function
+// Test of the loadAudio function
+/*
 (function () {
   console.log('Test loadAudio function');
   Reverbify.loadAudio('/audio/K4_impulse_response.wav', function (didLoad, audioBuffer) {
@@ -53,3 +54,4 @@ Reverbify.loadAudio = function (path, onLoad) {
     }
   })
 })();
+    */
