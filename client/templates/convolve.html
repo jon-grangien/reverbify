@@ -1,0 +1,28 @@
+<template name="convolve">
+
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton path=""}}
+  {{/contentFor}}
+
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Choose reverb</h1>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose a reverb
+          <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Matteus Church</a></li>
+          <li><a href="#">K4</a></li>
+          <li><a href="#">Old Chamber</a></li>
+        </ul>
+      </div>
+
+      <!--<button>Reverbify</button> -->
+
+    {{/ionContent}}
+  {{/ionView}}
+</template>

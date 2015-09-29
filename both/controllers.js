@@ -3,3 +3,5 @@ AppController = RouteController.extend({
 });
 
 HelloController = AppController.extend({});
+
+ConvolveController = AppController.extend({});
