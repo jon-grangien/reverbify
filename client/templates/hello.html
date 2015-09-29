@@ -1,33 +1,33 @@
 <template name="hello">
 
-	{{#contentFor "headerTitle"}}
+  {{#contentFor "headerTitle"}}
     <h1 class="title">Reverbify</h1>
   {{/contentFor}}
 
   {{#ionView}}
     {{#ionContent}}
 
-    	<br><br>
+      <br><br>
 
-	    <div class="col col-50 col-offset-25">
-		    <button class="button button-calm button-block use-existing-button">
-		    	Use existing
-		    </button>
-		  </div>
+      <div class="col col-50 col-offset-25">
+        <button class="button button-calm button-block use-existing-button">
+          Use existing
+        </button>
+      </div>
 
-	    <div class="col col-50 col-offset-25">
-		    <button class="button button-balanced button-block record-button">
-		    	Record audio
-		    </button>
-		  </div>
-      
-		  <br><br>
+      <div class="col col-50 col-offset-25">
+        <button class="button button-balanced button-block record-button">
+          Record audio
+        </button>
+      </div>
 
-		  <div class="col col-50 col-offset-25">
-	      <button class="button button-balanced button-block continue-button disabled">
-	      	Next step!
-	      </button>
-	    </div>
+      <br><br>
+
+      <div class="col col-50 col-offset-25">
+        <button class="button button-balanced button-block continue-button disabled">
+          Next step!
+        </button>
+      </div>
     {{/ionContent}}
   {{/ionView}}
 </template>
