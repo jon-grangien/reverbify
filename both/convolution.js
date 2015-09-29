@@ -1,12 +1,13 @@
-Convolution = {};
+Reverbify = {};
 
 /**
  * Convolves the (1D array) signal with the (1D array) kernel and returns the convolved signal.
+ * Adapted from (http://stackoverflow.com/a/8425094).
  * @param signal The signal to be convolved
  * @param kernel The kernel to be used in th econvolution
  * @returns {Array} The convolved signal
  */
-Convolution.convolve = function(signal, kernel) {
+Reverbify.convolve = function(signal, kernel) {
   "use strict";
 
   var signalLength = signal.length, kernelLength = kernel.length;
