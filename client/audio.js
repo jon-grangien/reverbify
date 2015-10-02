@@ -33,6 +33,7 @@ Reverbify.loadAudio = function (path, onLoad) {
   };
 
   xhr.send();
+
 };
 
 // Test of the loadAudio function
