@@ -1,14 +1,43 @@
 Template.play.events({
   'click .play-button': function () {
+    console.log("pressed");
     IonLoading.show();
 
     if( Platform.isAndroid() ) {
-        // var env_title = Reverbify.Audio.kernelBuffer;
-        // var signal = Reverbify.Audio.signalBuffer;
+        console.log("platform android");
 
-        // var conv = Reverbify.convolution(signal, env_title);
+        if (!window.AudioContext) {
+            if (!window.webkitAudioContext) {
+                console.log("audiocontext unsupported :(");
+            }
+            window.AudioContext = window.webkitAudioContext;
+        }
+
+        var kernel = Reverbify.Audio.kernelBuffer;
+        var signal = Reverbify.Audio.signalBuffer;
+
+        console.log("convoluting");
+        var conv = Reverbify.convolve(signal, kernel);
+        console.log("convolution done");
+
+        var context = new AudioContext();
+
+        var buffer = new Uint8Array( conv.length );
+        buffer.set( new Uint8Array(conv), 0 );
+
+        console.log("decoding");
+
+        context.decodeAudioData(buffer.buffer, function(audioBuffer) {
+            var source = context.createBufferSource();
+            source.buffer = audioBuffer;
+            source.connect( context.destination );
+            source.start(0);
+        });
+
+        console.log("all done");
+
         IonLoading.hide();
-        alert('Android not supported yet');
+        // alert('Android not supported yet');
     }
 
     else {
