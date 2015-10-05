@@ -6,4 +6,6 @@ HelloController = AppController.extend({});
 
 ConvolveController = AppController.extend({});
 
+SelectController = AppController.extend({});
+
 PlayController = AppController.extend({});
