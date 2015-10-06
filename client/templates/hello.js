@@ -24,8 +24,15 @@ Template.hello.events({
       // Store signal buffer and load kernel
       var signalBuffer = audioBuffer;
 
-      alert('Default audio signal loaded!');
+      // alert('Default audio signal loaded!');
       IonLoading.hide();
+
+      $('.default-confirmation').fadeIn("slow");
+
+      // hide after 5 sec
+      // setTimeout(function() {
+      //   $('.default-confirmation').fadeOut("slow");        
+      // }, 5000);
 
       // Store signal and kernel in global object Reverbify
       Reverbify.Audio = {};
