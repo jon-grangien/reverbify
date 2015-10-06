@@ -39,16 +39,14 @@ Template.select.events({
   },
 
   'click .cancel-button': function () {
-    //loses audio kernel!
+    //loses ir ID!
     
     $('.kernellist').show();
-    $('.environment-card').addClass('hidden');    
+    $('.environment-card').addClass('hidden');
   }
 });
 
 
-//Session.setDefault('env_title', '>Default title<');
-//Session.setDefault('env_image_src', '/images/env_image_default.jpg');
 
 Template.select.helpers({
   env_title: function () {

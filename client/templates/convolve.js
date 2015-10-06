@@ -8,7 +8,6 @@ Template.convolve.events({
     var target = event.target;
 
     var env_title = target.innerHTML;
-    // alert('Chose ' + env_title);
 
     Session.set('env_title', env_title);
 
@@ -38,8 +37,6 @@ Template.convolve.events({
 });
 
 
-//Session.setDefault('env_title', '>Default title<');
-//Session.setDefault('env_image_src', '/images/env_image_default.jpg');
 
 Template.convolve.helpers({
   env_title: function () {

@@ -1,10 +1,39 @@
 Template.hello.events({
   'click .continue-button': function () {
-    Router.go('/select');
+    Router.go('/convolve');
   },
 
-  'click .use-existing-button': function () {
-    $('.continue-button').removeClass("disabled");
+
+  'click .upload-button': function () {
+
+      IonLoading.show();
+
+      var file = document.getElementById('file_input').files[0];
+      if (!file) {
+        alert('Failed to find selected signal!');
+        return;
+      }
+
+    // Store signal in global object Reverbify
+    Reverbify.Audio = {};
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var contents = e.target.result;
+
+
+        // Convert ArrayBuffer to AudioBuffer, and store it in Reverbify
+        Reverbify.AudioCtx.decodeAudioData(contents, function(buf) {
+          Reverbify.Audio.signalBuffer = buf;
+        });
+
+        IonLoading.hide();
+        alert('Selected audio signal loaded!');
+
+        $('.continue-button').removeClass("disabled");
+      };
+      reader.readAsArrayBuffer(file);
+
   },
 
   'click .record-button': function () {
@@ -27,7 +56,7 @@ Template.hello.events({
       alert('Default audio signal loaded!');
       IonLoading.hide();
 
-      // Store signal and kernel in global object Reverbify
+      // Store signal in global object Reverbify
       Reverbify.Audio = {};
       Reverbify.Audio.signalBuffer = signalBuffer;
 

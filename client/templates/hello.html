@@ -10,9 +10,13 @@
       <br><br>
 
       <div class="col col-50 col-offset-25">
-        <button class="button button-calm button-block use-existing-button">
-          Use existing
+          <input type="file" id="file_input">
+          <button class="button button-calm button-block upload-button">
+          Upload
         </button>
+          {{#each files}}
+              <p>{{percent_uploaded}}</p>
+          {{/each}}
       </div>
 
       <div class="col col-50 col-offset-25">

@@ -5,7 +5,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 insecure
 less
 nemo64:bootstrap
@@ -17,3 +16,4 @@ fourseven:scss@2.0.0
 meteoric:ionic-sass
 meteoric:ionicons-sass
 meteoric:ionic
+lepozepo:s3@=4.1.3
