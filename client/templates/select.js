@@ -25,27 +25,15 @@ Template.select.events({
       var kernelBuffer = audioBuffer;
 
       IonLoading.hide();
-      alert('Selected kernel loaded!');
+      // alert('Selected kernel loaded!');
 
       // Store signal and kernel in global object Reverbify
       Reverbify.Audio.kernelBuffer = kernelBuffer;
+
+      IonModal.open("envModal");
     });
-
-    $('.kernellist').hide();
-    $('.environment-card').removeClass('hidden');
-  },
-
-  'click .cancel-button': function () {
-    //loses audio kernel!
-    
-    $('.kernellist').show();
-    $('.environment-card').addClass('hidden');    
   }
 });
-
-
-//Session.setDefault('env_title', '>Default title<');
-//Session.setDefault('env_image_src', '/images/env_image_default.jpg');
 
 Template.select.helpers({
   environments: [
