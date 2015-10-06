@@ -1,6 +1,6 @@
 Template.hello.events({
   'click .continue-button': function () {
-    Router.go('/convolve');
+    Router.go('/select');
   },
 
   'click .use-existing-button': function () {
