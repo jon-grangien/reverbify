@@ -5,16 +5,13 @@ Template.select.events({
 
   'click .option': function (event, template) {
     IonLoading.show();
-    var target = event.target;
-
-    var env_title = target.h2;
-    // alert('Chose ' + env_title);
+    var env_title = this.title;
 
     Session.set('env_title', env_title);
 
     // Set correct image
-    var irID = target.id;
-    console.log("ir id: " + irID);
+    var irID = this.id;
+    // console.log("ir id: " + irID);
     Session.set('env_image_src', '/images/' + irID + '.jpg');
 
     // Set correct IR
