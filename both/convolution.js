@@ -13,8 +13,6 @@ Reverbify.convolve = function(signal, kernel) {
   var signalLength = signal.length, kernelLength = kernel.length;
   var result = [];
 
-  console.log("begin calculating");
-
   for (var n = 0; n < signalLength + kernelLength - 1; ++n) {
     var kMin = (n >= kernelLength - 1) ? n - (kernelLength - 1) : 0;
     var kMax = (n < signalLength - 1) ? n : signalLength - 1;
@@ -26,10 +24,8 @@ Reverbify.convolve = function(signal, kernel) {
       result[n] += signal[k] * kernel[n - k];
     }
 
-    console.log(n/(signalLength + kernelLength - 1) + "% done");
+    console.log(Math.round( (n/(signalLength + kernelLength - 1) * 100 )) + "% done");
   }
-
-  console.log("done calculating");
 
   return result;
 };

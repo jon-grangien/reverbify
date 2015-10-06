@@ -6,35 +6,37 @@ Template.play.events({
     if( Platform.isAndroid() ) {
         console.log("platform android");
 
-        if (!window.AudioContext) {
-            if (!window.webkitAudioContext) {
-                console.log("audiocontext unsupported :(");
-            }
-            window.AudioContext = window.webkitAudioContext;
-        }
-
         var kernel = Reverbify.Audio.kernelBuffer;
         var signal = Reverbify.Audio.signalBuffer;
 
+        //ta ut arrayer
+        var kernelData = kernel.getChannelData(1);
+        var signalData = signal.getChannelData(1);
+
+        //falta
         console.log("convoluting");
-        var conv = Reverbify.convolve(signal, kernel);
+        var result = Reverbify.convolve(signalData, kernelData);
         console.log("convolution done");
 
-        var context = new AudioContext();
 
-        var buffer = new Uint8Array( conv.length );
-        buffer.set( new Uint8Array(conv), 0 );
+        //sätt till audio buffers
+        var arrayBuffer = new ArrayBuffer(result.length);
+        var bufferView = new Uint8Array(arrayBuffer);
+        for (i = 0; i < result.length; i++) {
+          bufferView[i] = result[i];
+        }
 
-        console.log("decoding");
-
-        context.decodeAudioData(buffer.buffer, function(audioBuffer) {
-            var source = context.createBufferSource();
-            source.buffer = audioBuffer;
-            source.connect( context.destination );
+        // play
+        Reverbify.audioCtx.decodeAudioData(arrayBuffer, function(buffer) {
+            // Create a source node from the buffer
+            var source = Reverbify.audioCtx.createBufferSource();
+            source.buffer = buffer;
+            // Connect to the final output node (the speakers)
+            source.connect(Reverbify.audioCtx.destination);
+            // Play immediately
             source.start(0);
-        });
 
-        console.log("all done");
+        });
 
         IonLoading.hide();
         // alert('Android not supported yet');
