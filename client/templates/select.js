@@ -5,16 +5,13 @@ Template.select.events({
 
   'click .option': function (event, template) {
     IonLoading.show();
-    var target = event.target;
-
-    var env_title = target.h2;
-    // alert('Chose ' + env_title);
+    var env_title = this.title;
 
     Session.set('env_title', env_title);
 
     // Set correct image
-    var irID = target.id;
-    console.log("ir id: " + irID);
+    var irID = this.id;
+    // console.log("ir id: " + irID);
     Session.set('env_image_src', '/images/' + irID + '.jpg');
 
     // Set correct IR
@@ -28,27 +25,65 @@ Template.select.events({
       var kernelBuffer = audioBuffer;
 
       IonLoading.hide();
-      alert('Selected kernel loaded!');
+      // alert('Selected kernel loaded!');
 
       // Store signal and kernel in global object Reverbify
       Reverbify.Audio.kernelBuffer = kernelBuffer;
+
+      IonModal.open("envModal");
     });
-
-    $('.kernellist').hide();
-    $('.environment-card').removeClass('hidden');
-  },
-
-  'click .cancel-button': function () {
-    //loses ir ID!
-    
-    $('.kernellist').show();
-    $('.environment-card').addClass('hidden');
   }
 });
 
 
-
 Template.select.helpers({
+  environments: [
+    {
+      id: "Matteus", 
+      title: "Matteus Church",
+      desc: "Nice church in Norrköping"
+    },
+    {
+      id: "K4", 
+      title: "K4",
+      desc: "Förståsch."
+    },
+    {
+      id: "Bath_House", 
+      title: "Bath House",
+      desc: ""
+    },
+    {
+      id: "Car_Park", 
+      title: "Car Park",
+      desc: "Large open space."
+    },
+    {
+      id: "Cavern", 
+      title: "Cavern",
+      desc: "Creepy. Adventure."
+    },
+    {
+      id: "Cinema_Room", 
+      title: "Cinema Room",
+      desc: "Bouncy."
+    },
+    {
+      id: "Concert_Hall", 
+      title: "Concert Hall",
+      desc: "wow."
+    },
+    {
+      id: "Old_Chamber", 
+      title: "Old Chamber",
+      desc: "Very old."
+    },
+    {
+      id: "Stone_Quarry", 
+      title: "Stone Quarry",
+      desc: "It rocks."
+    }
+  ],
   env_title: function () {
     return Session.get('env_title');
   },

@@ -1,6 +1,6 @@
 Template.hello.events({
   'click .continue-button': function () {
-    Router.go('/convolve');
+    Router.go('/select');
   },
 
 
@@ -53,10 +53,17 @@ Template.hello.events({
       // Store signal buffer and load kernel
       var signalBuffer = audioBuffer;
 
-      alert('Default audio signal loaded!');
+      // alert('Default audio signal loaded!');
       IonLoading.hide();
 
-      // Store signal in global object Reverbify
+      $('.default-confirmation').fadeIn("slow");
+
+      // hide after 5 sec
+      // setTimeout(function() {
+      //   $('.default-confirmation').fadeOut("slow");        
+      // }, 5000);
+
+      // Store signal and kernel in global object Reverbify
       Reverbify.Audio = {};
       Reverbify.Audio.signalBuffer = signalBuffer;
 

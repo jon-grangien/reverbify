@@ -14,6 +14,8 @@ Reverbify.loadAudio = function (path, onLoad) {
   xhr.responseType = 'arraybuffer';
   xhr.open('GET', path, true);
 
+  // console.log("audio path: " + path);
+
   xhr.onload = function () {
     // The arraybuffer contains the audio data from the given file
     var audioData = xhr.response;

@@ -12,84 +12,13 @@
     {{#ionContent}}
       
       <div class="list kernellist">
-
-        <a id="Matteus" class="item item-thumbnail-left option" href="#">
-          <img src="/images/Matteus2.jpg">
-          <h2>Matteus Church</h2>
-          <p>Nice church in Norrköping</p>
-        </a>
-
-        <a id="K4" class="item item-thumbnail-left option" href="#">
-          <img src="/images/K4.jpg">
-          <h2>K4</h2>
-          <p>Förståsch.</p>
-        </a>
-
-        <a id="Bath_House" class="item item-thumbnail-left option" href="#">
-          <img src="/images/Bath_House.jpg">
-          <h2>Bath House</h2>
-          <p></p>
-        </a>
-
-        <a id="Car_Park" class="item item-thumbnail-left option" href="#">
-          <img src="/images/Car_Park.jpg">
-          <h2>Car Park</h2>
-          <p>Large open space</p>
-        </a>
-
-        <a id="Cavern" class="item item-thumbnail-left option" href="#">
-          <img src="/images/Cavern.jpg">
-          <h2>Cavern</h2>
-          <p>Creepy. Adventure.</p>
-        </a>
-
-        <a id="Cinema_Room" class="item item-thumbnail-left option" href="#">
-          <img src="/images/Cinema_Room.jpg">
-          <h2>Cinema Room</h2>
-          <p>Bouncy</p>
-        </a>
-
-        <a id="Concert_Hall" class="item item-thumbnail-left option" href="#">
-          <img src="/images/Concert_Hall.jpg">
-          <h2>Concert Hall</h2>
-          <p>wow.</p>
-        </a>
-
-        <a id="Old_Chamber" class="item item-thumbnail-left option" href="#">
-          <img src="/images/Old_Chamber.jpg">
-          <h2>Old Chamber</h2>
-          <p>Very old.</p>
-        </a>
-
-        <a id="Stone_Quarry" class="item item-thumbnail-left option" href="#">
-          <img src="/images/Stone_Quarry.jpg">
-          <h2>Stone Quarry</h2>
-          <p>It rocks.</p>
-        </a>
-
-      </div>
-
-      <div class="card hidden environment-card">
-        <div class="item">
-          <h2>{{env_title}}</h2>
-        </div>
-
-        <div class="item item-image">
-          <!--<img src="/images/env_image_default.jpg">-->
-          <img src={{env_image_src}}>
-        </div>
-
-        <div class="item">
-        	<div class="button-bar">
-	          <button class="button button-assertive button-block cancel-button">
-	            Cancel
-	          </button>
-
-	          <button class="button button-calm button-block reverbify-button">
-	            Reverbify!
-	          </button>
-	         </div>
-        </div>
+        {{#each environments}}
+          <a id="{{id}}" class="item item-thumbnail-left option" href="#">
+            <img src="/images/{{id}}.jpg">
+            <h2>{{title}}</h2>
+            <p>{{desc}}</p>
+          </a>
+        {{/each}}
       </div>
 
     {{/ionContent}}
