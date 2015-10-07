@@ -98,6 +98,30 @@ Reverbify.AudioRecord.stop = function() {
 
   var audio = document.querySelector('audio');
   Reverbify.AudioRecord.recorder.exportWAV(function(stream){
+    console.log('exportWAV()');
+    console.log(stream);
+
+    var reader = new FileReader();
+    reader.addEventListener('loadend', function() {
+      var arrayBuffer = reader.result;
+      console.log('result');
+      console.log(arrayBuffer);
+
+      Reverbify.AudioCtx.decodeAudioData(
+          arrayBuffer,
+          function (decodedData) {
+            // The audio data loaded successfully, callback with success and the data
+            Reverbify.Audio.signalBuffer = decodedData;
+          },
+          function (err) {
+            // The audio data failed to load, callback with failure and AudioBuffer = null
+            console.log("Error while decoding audio data: " + err);
+          }
+      );
+    });
+
+    reader.readAsArrayBuffer(stream);
+
     audio.src = window.URL.createObjectURL(stream);
   });
 };
