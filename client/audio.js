@@ -1,4 +1,11 @@
 // Load Web Audio API context
+(function () {
+  if (!window.AudioContext && !window.webkitAudioContext) {
+    alert('Unfortunately, the "Web Audio API" is not supported in your browser, so Reverbify will NOT work.');
+    throw new Error('Web Audio API not supported...');
+  }
+})();
+
 Reverbify.AudioCtx = new (window.AudioContext || window.webkitAudioContext)();
 Reverbify.Audio = {};
 /**
@@ -40,21 +47,107 @@ Reverbify.loadAudio = function (path, onLoad) {
 
 // Test of the loadAudio function
 /*
-(function () {
-  console.log('Test loadAudio function');
-  Reverbify.loadAudio('/audio/K4_impulse_response.wav', function (didLoad, audioBuffer) {
-    if (didLoad) {
-      console.log('Audio file loaded');
-      console.log(audioBuffer);
+ (function () {
+ console.log('Test loadAudio function');
+ Reverbify.loadAudio('/audio/K4_impulse_response.wav', function (didLoad, audioBuffer) {
+ if (didLoad) {
+ console.log('Audio file loaded');
+ console.log(audioBuffer);
 
-      for (var i = 0; i < audioBuffer.numberOfChannels; ++i) {
-        console.log(audioBuffer.getChannelData(i));
-      }
-    }
+ for (var i = 0; i < audioBuffer.numberOfChannels; ++i) {
+ console.log(audioBuffer.getChannelData(i));
+ }
+ }
 
-    else {
-      console.log('Failed to load audio file');
-    }
-  })
-})();
-    */
+ else {
+ console.log('Failed to load audio file');
+ }
+ })
+ })();
+ */
+
+function hasUserMedia() {
+  if (!!navigator.getUserMedia)
+    return true;
+
+  if (!!navigator.webkitGetUserMedia) {
+    navigator.getUserMedia = navigator.webkitGetUserMedia;
+    return true;
+  }
+
+  if (!!navigator.mozGetUserMedia) {
+    navigator.getUserMedia = navigator.mozGetUserMedia;
+    return true;
+  }
+
+  if (!!navigator.msGetUserMedia) {
+    navigator.getUserMedia = navigator.msGetUserMedia;
+    return true;
+  }
+
+  return false;
+}
+
+Reverbify.AudioRecord = {};
+
+Reverbify.AudioRecord.isRecording = false;
+
+Reverbify.AudioRecord.stop = function () {
+  Reverbify.AudioRecord.recorder.stop();
+  Reverbify.AudioRecord.isRecording = false;
+
+  var audio = document.querySelector('audio');
+  Reverbify.AudioRecord.recorder.exportWAV(function (stream) {
+    console.log('exportWAV()');
+    console.log(stream);
+
+    var reader = new FileReader();
+    reader.addEventListener('loadend', function () {
+      var arrayBuffer = reader.result;
+      console.log('result');
+      console.log(arrayBuffer);
+
+      Reverbify.AudioCtx.decodeAudioData(
+          arrayBuffer,
+          function (decodedData) {
+            // The audio data loaded successfully, callback with success and the data
+            Reverbify.Audio.signalBuffer = decodedData;
+          },
+          function (err) {
+            // The audio data failed to load, callback with failure and AudioBuffer = null
+            console.log("Error while decoding audio data: " + err);
+          }
+      );
+    });
+
+    reader.readAsArrayBuffer(stream);
+
+    audio.src = window.URL.createObjectURL(stream);
+  });
+};
+
+Reverbify.AudioRecord.start = function () {
+  if (!hasUserMedia()) {
+    alert('Your browser does not support recording audio.');
+    return;
+  }
+
+  navigator.getUserMedia({audio: true},
+      Reverbify.AudioRecord.onStream,
+      Reverbify.AudioRecord.onStreamError);
+};
+
+Reverbify.AudioRecord.onStream = function (stream) {
+  var mediaStreamSource = Reverbify.AudioCtx.createMediaStreamSource(stream);
+
+  console.log('onStream');
+  console.log(Recorder);
+
+  Reverbify.AudioRecord.recorder = new Recorder(mediaStreamSource);
+  Reverbify.AudioRecord.isRecording = true;
+  Reverbify.AudioRecord.recorder.record();
+};
+
+Reverbify.AudioRecord.onStreamError = function (e) {
+  console.error('Error getting microphone', e);
+};

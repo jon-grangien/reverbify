@@ -1,4 +1,5 @@
-<template name="hello" xmlns="http://www.w3.org/1999/html">
+<template name="hello">
+  <script src="./recorderjs/recorder.js"></script>
 
   {{#contentFor "headerTitle"}}
     <h1 class="title">Reverbify</h1>
@@ -10,7 +11,7 @@
       <br><br>
 
       <div class="col col-50 col-offset-25">
-          <button class="button button-calm button-block upload-first">
+          <button class="button button-outline button-balanced button-block upload-first" id = "open-upload-button">
           Upload
         </button>
       </div>
@@ -27,14 +28,18 @@
         <div class="col-sm-3" ></div>
       </div>
 
-      <div class="col col-50 col-offset-25">
-        <button class="button button-balanced button-block record-button">
+      <div class="col col-50 col-offset-25 mobile-disabled">
+        <button class="button button-outline button-balanced button-block button-select" id="open-recordview-button">
           Record audio
         </button>
       </div>
 
+      {{#if isNotMobile}}
+        {{> recordAudio }}
+      {{/if}}
+
       <div class="col col-50 col-offset-25">
-        <button class="button button-balanced button-block default-audio-button">
+        <button class="button button-outline button-balanced button-block button-select" id="default-audio-button">
           (Use default audio)
         </button>
       </div>
@@ -42,17 +47,20 @@
       <!-- default audio confirmation message -->
       <!-- hidden initially -->
       <div class="col col-50 col-offset-25 default-confirmation" style="display: none;">
-        <p class="balanced">Default audio loaded!</p>
+        <p class="balanced">{{confirmation}}</p>
       </div>
 
 
       <br><br>
 
       <div class="col col-50 col-offset-25">
-        <button class="button button-balanced button-block continue-button disabled">
+        <button class="button button-balanced button-block {{continueButtonClass}}" id="continue-button">
           Next step!
         </button>
       </div>
+
+      <audio id="audio"></audio>
+
     {{/ionContent}}
   {{/ionView}}
 </template>

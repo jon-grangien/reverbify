@@ -1,55 +1,88 @@
+var currentSelection = null;
+
+function updateCurrentSelection(newSelection) {
+  if (currentSelection !== null) {
+    currentSelection.addClass('button-outline');
+  }
+  if (newSelection !== null){
+      currentSelection = newSelection;
+      currentSelection.removeClass('button-outline');
+  }
+    else {
+      currentSelection = newSelection;
+  }
+}
+
 Template.hello.events({
-  'click .continue-button': function () {
+  'click #continue-button': function () {
     Router.go('/select');
   },
 
 
+
   'click .upload-first': function () {
+    var btn = $('#open-upload-button');
+    updateCurrentSelection(btn);
     // Enable uploading
-    $('.input-btn').removeClass('hidden');
+    $(function(){
+      if($('.input-btn').hasClass("hidden")){
+        $(".input-btn").removeClass("hidden");  }
+      else {  $(".input-btn").addClass("hidden");
+        updateCurrentSelection(null); }
+      })
+
   },
 
   'click .upload-button': function () {
 
-      var file = document.getElementById('file_input').files[0];
-      if (!file) {
-        alert('Failed to find selected signal!');
-        return;
-      }
+    var file = document.getElementById('file_input').files[0];
+    if (!file) {
+      Reverbify.updateFeedback('Failed to find audio to upload', false);
+      $('.default-confirmation').show();
+      return;
+    }
 
     // Store signal in global object Reverbify
-      var reader = new FileReader();
-      reader.onload = function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
 
-        var contents = e.target.result;
+      var contents = e.target.result;
+      console.log(contents);
+      // Convert ArrayBuffer to AudioBuffer, and store it in Reverbify
+      Reverbify.AudioCtx.decodeAudioData(contents, function (buf) {
+
+        Reverbify.Audio.signalBuffer = buf;
         console.log(contents);
-
-        // Convert ArrayBuffer to AudioBuffer, and store it in Reverbify
-        Reverbify.AudioCtx.decodeAudioData(contents, function(buf) {
-
-          Reverbify.Audio.signalBuffer = buf;
-          console.log(contents);
-          console.log(buf);
+        console.log(buf);
         });
-
-        alert('Selected audio signal loaded!');
 
         $('.continue-button').removeClass("disabled");
       };
       reader.readAsArrayBuffer(file);
 
+    Reverbify.updateFeedback('Selected audio loaded!', true);
+    $('.default-confirmation').fadeIn();
+
+    reader.readAsArrayBuffer(file);
   },
 
-  'click .record-button': function () {
-    $('.continue-button').removeClass("disabled");
+  'click #open-recordview-button': function () {
+    var btn = $('#open-recordview-button');
+    updateCurrentSelection(btn);
+    $('#record-view').css('display', 'inline');
+
   },
 
-  'click .default-audio-button': function () {
+  'click #default-audio-button': function () {
+    var btn = $('#default-audio-button');
+    updateCurrentSelection(btn);
     IonLoading.show();
+
     // Load default audio signal
     Reverbify.loadAudio('/audio/default_signal.wav', function (didLoad, audioBuffer) {
       if (!didLoad) {
-        alert('Failed to load default signal!');
+        Reverbify.updateFeedback('Failed to load audio!', false);
+        $('.default-confirmation').show();
         IonLoading.hide();
         return;
       }
@@ -60,20 +93,21 @@ Template.hello.events({
       // alert('Default audio signal loaded!');
       IonLoading.hide();
 
+      Reverbify.updateFeedback('Default audio loaded!', true);
       $('.default-confirmation').fadeIn("slow");
 
-      // hide after 5 sec
-      // setTimeout(function() {
-      //   $('.default-confirmation').fadeOut("slow");        
-      // }, 5000);
-
       // Store signal and kernel in global object Reverbify
-
       Reverbify.Audio.signalBuffer = signalBuffer;
 
       // Enable continuation
       $('.continue-button').removeClass('disabled');
     });
 
+  }
+});
+
+Template.hello.helpers({
+  confirmation: function () {
+    return Session.get('confirmation');
   }
 });
