@@ -43,7 +43,7 @@ Template.hello.events({
   'click .default-audio-button': function () {
     IonLoading.show();
     // Load default audio signal
-    Reverbify.loadAudio('/audio/default_signal.wav', function (didLoad, audioBuffer) {
+    Reverbify.loadAudio('/audio/sowehaveblank.wav', function (didLoad, audioBuffer) {
       if (!didLoad) {
         alert('Failed to load default signal!');
         IonLoading.hide();

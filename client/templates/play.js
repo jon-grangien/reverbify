@@ -1,14 +1,45 @@
 Template.play.events({
   'click .play-button': function () {
+    console.log("pressed");
     IonLoading.show();
 
     if( Platform.isAndroid() ) {
-        // var env_title = Reverbify.Audio.kernelBuffer;
-        // var signal = Reverbify.Audio.signalBuffer;
+        console.log("platform android");
 
-        // var conv = Reverbify.convolution(signal, env_title);
+        var kernel = Reverbify.Audio.kernelBuffer;
+        var signal = Reverbify.Audio.signalBuffer;
+
+        //ta ut arrayer
+        var kernelData = kernel.getChannelData(1);
+        var signalData = signal.getChannelData(1);
+
+        //falta
+        console.log("convoluting");
+        var result = Reverbify.convolve(signalData, kernelData);
+        console.log("convolution done");
+
+
+        //sätt till audio buffers
+        var arrayBuffer = new ArrayBuffer(result.length);
+        var bufferView = new Uint8Array(arrayBuffer);
+        for (i = 0; i < result.length; i++) {
+          bufferView[i] = result[i];
+        }
+
+        // play
+        Reverbify.audioCtx.decodeAudioData(arrayBuffer, function(buffer) {
+            // Create a source node from the buffer
+            var source = Reverbify.audioCtx.createBufferSource();
+            source.buffer = buffer;
+            // Connect to the final output node (the speakers)
+            source.connect(Reverbify.audioCtx.destination);
+            // Play immediately
+            source.start(0);
+
+        });
+
         IonLoading.hide();
-        alert('Android not supported yet');
+        // alert('Android not supported yet');
     }
 
     else {

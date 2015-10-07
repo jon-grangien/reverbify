@@ -23,6 +23,8 @@ Reverbify.convolve = function(signal, kernel) {
     for (var k = kMin; k <= kMax; ++k) {
       result[n] += signal[k] * kernel[n - k];
     }
+
+    console.log(Math.round( (n/(signalLength + kernelLength - 1) * 100 )) + "% done");
   }
 
   return result;
