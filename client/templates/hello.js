@@ -6,7 +6,6 @@ Template.hello.events({
 
   'click .upload-button': function () {
 
-      IonLoading.show();
 
       var file = document.getElementById('file_input').files[0];
       if (!file) {
@@ -15,19 +14,21 @@ Template.hello.events({
       }
 
     // Store signal in global object Reverbify
-    Reverbify.Audio = {};
-
       var reader = new FileReader();
       reader.onload = function (e) {
+
         var contents = e.target.result;
-
-
+        console.log(contents);
+        console.log("Innan");
         // Convert ArrayBuffer to AudioBuffer, and store it in Reverbify
         Reverbify.AudioCtx.decodeAudioData(contents, function(buf) {
-          Reverbify.Audio.signalBuffer = buf;
-        });
 
-        IonLoading.hide();
+          Reverbify.Audio.signalBuffer = buf;
+          console.log(contents);
+          console.log(buf);
+          console.log("Här");
+        });
+        console.log("Där");
         alert('Selected audio signal loaded!');
 
         $('.continue-button').removeClass("disabled");
@@ -74,7 +75,7 @@ Template.hello.events({
       // }, 5000);
 
       // Store signal and kernel in global object Reverbify
-      Reverbify.Audio = {};
+
       Reverbify.Audio.signalBuffer = signalBuffer;
 
       // Enable continuation

@@ -6,6 +6,7 @@
 
 meteor-platform
 insecure
+autopublish
 less
 nemo64:bootstrap
 cfs:standard-packages
@@ -16,4 +17,3 @@ fourseven:scss@2.0.0
 meteoric:ionic-sass
 meteoric:ionicons-sass
 meteoric:ionic
-lepozepo:s3@=4.1.3

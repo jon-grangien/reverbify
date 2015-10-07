@@ -1,6 +1,6 @@
 // Load Web Audio API context
 Reverbify.AudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
+Reverbify.Audio = {};
 /**
  * Loads the audio file located at "path" using the Web Audio API, and calls onLoad when completed
  * @param path The path to the audio file
