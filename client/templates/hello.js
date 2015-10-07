@@ -1,8 +1,17 @@
+var currentSelection = null;
+
+function updateCurrentSelection(newSelection) {
+  if (currentSelection !== null) {
+    currentSelection.addClass('button-outline');
+  }
+  currentSelection = newSelection;
+  currentSelection.removeClass('button-outline');
+}
+
 Template.hello.events({
-  'click .continue-button': function () {
+  'click #continue-button': function () {
     Router.go('/select');
   },
-
 
   'click .upload-button': function () {
 
@@ -38,14 +47,17 @@ Template.hello.events({
       $('.default-confirmation').fadeIn();
 
       reader.readAsArrayBuffer(file);
-
   },
 
-  'click .record-button': function () {
-    $('.continue-button').removeClass("disabled");
+  'click #open-recordview-button': function () {
+    var btn = $('#open-recordview-button');
+    updateCurrentSelection(btn);
+    $('#record-view').css('display', 'inline');
   },
 
-  'click .default-audio-button': function () {
+  'click #default-audio-button': function () {
+    var btn = $('#default-audio-button');
+    updateCurrentSelection(btn);
     IonLoading.show();
 
     // Load default audio signal
@@ -67,7 +79,6 @@ Template.hello.events({
       $('.default-confirmation').fadeIn("slow");
 
       // Store signal and kernel in global object Reverbify
-
       Reverbify.Audio.signalBuffer = signalBuffer;
 
       // Enable continuation

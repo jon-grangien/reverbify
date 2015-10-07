@@ -1,4 +1,5 @@
 <template name="hello">
+  <script src="./recorderjs/recorder.js"></script>
 
   {{#contentFor "headerTitle"}}
     <h1 class="title">Reverbify</h1>
@@ -20,14 +21,18 @@
           {{/each}}
       </div>
 
-      <div class="col col-50 col-offset-25">
-        <button class="button button-balanced button-block record-button">
+      <div class="col col-50 col-offset-25 mobile-disabled">
+        <button class="button button-outline button-balanced button-block button-select" id="open-recordview-button">
           Record audio
         </button>
       </div>
 
+      {{#if isNotMobile}}
+        {{> recordAudio }}
+      {{/if}}
+
       <div class="col col-50 col-offset-25">
-        <button class="button button-balanced button-block default-audio-button">
+        <button class="button button-outline button-balanced button-block button-select" id="default-audio-button">
           (Use default audio)
         </button>
       </div>
@@ -42,10 +47,13 @@
       <br><br>
 
       <div class="col col-50 col-offset-25">
-        <button class="button button-balanced button-block continue-button disabled">
+        <button class="button button-balanced button-block {{continueButtonClass}}" id="continue-button">
           Next step!
         </button>
       </div>
+
+      <audio id="audio"></audio>
+
     {{/ionContent}}
   {{/ionView}}
 </template>
