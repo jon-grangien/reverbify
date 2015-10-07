@@ -39,47 +39,47 @@ Template.select.events({
 Template.select.helpers({
   environments: [
     {
-      id: "Matteus", 
+      id: "Matteus",
       title: "Matteus Church",
       desc: "Nice church in Norrköping"
     },
     {
-      id: "K4", 
+      id: "K4",
       title: "K4",
       desc: "Förståsch."
     },
     {
-      id: "Bath_House", 
+      id: "Bath_House",
       title: "Bath House",
       desc: ""
     },
     {
-      id: "Car_Park", 
+      id: "Car_Park",
       title: "Car Park",
       desc: "Large open space."
     },
     {
-      id: "Cavern", 
+      id: "Cavern",
       title: "Cavern",
       desc: "Creepy. Adventure."
     },
     {
-      id: "Cinema_Room", 
+      id: "Cinema_Room",
       title: "Cinema Room",
       desc: "Bouncy."
     },
     {
-      id: "Concert_Hall", 
+      id: "Concert_Hall",
       title: "Concert Hall",
       desc: "wow."
     },
     {
-      id: "Old_Chamber", 
+      id: "Old_Chamber",
       title: "Old Chamber",
       desc: "Very old."
     },
     {
-      id: "Stone_Quarry", 
+      id: "Stone_Quarry",
       title: "Stone Quarry",
       desc: "It rocks."
     }

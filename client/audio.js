@@ -47,24 +47,24 @@ Reverbify.loadAudio = function (path, onLoad) {
 
 // Test of the loadAudio function
 /*
-(function () {
-  console.log('Test loadAudio function');
-  Reverbify.loadAudio('/audio/K4_impulse_response.wav', function (didLoad, audioBuffer) {
-    if (didLoad) {
-      console.log('Audio file loaded');
-      console.log(audioBuffer);
+ (function () {
+ console.log('Test loadAudio function');
+ Reverbify.loadAudio('/audio/K4_impulse_response.wav', function (didLoad, audioBuffer) {
+ if (didLoad) {
+ console.log('Audio file loaded');
+ console.log(audioBuffer);
 
-      for (var i = 0; i < audioBuffer.numberOfChannels; ++i) {
-        console.log(audioBuffer.getChannelData(i));
-      }
-    }
+ for (var i = 0; i < audioBuffer.numberOfChannels; ++i) {
+ console.log(audioBuffer.getChannelData(i));
+ }
+ }
 
-    else {
-      console.log('Failed to load audio file');
-    }
-  })
-})();
-    */
+ else {
+ console.log('Failed to load audio file');
+ }
+ })
+ })();
+ */
 
 function hasUserMedia() {
   if (!!navigator.getUserMedia)
@@ -92,17 +92,17 @@ Reverbify.AudioRecord = {};
 
 Reverbify.AudioRecord.isRecording = false;
 
-Reverbify.AudioRecord.stop = function() {
+Reverbify.AudioRecord.stop = function () {
   Reverbify.AudioRecord.recorder.stop();
   Reverbify.AudioRecord.isRecording = false;
 
   var audio = document.querySelector('audio');
-  Reverbify.AudioRecord.recorder.exportWAV(function(stream){
+  Reverbify.AudioRecord.recorder.exportWAV(function (stream) {
     console.log('exportWAV()');
     console.log(stream);
 
     var reader = new FileReader();
-    reader.addEventListener('loadend', function() {
+    reader.addEventListener('loadend', function () {
       var arrayBuffer = reader.result;
       console.log('result');
       console.log(arrayBuffer);
@@ -126,7 +126,7 @@ Reverbify.AudioRecord.stop = function() {
   });
 };
 
-Reverbify.AudioRecord.start = function() {
+Reverbify.AudioRecord.start = function () {
   if (!hasUserMedia()) {
     alert('Your browser does not support recording audio.');
     return;
@@ -137,7 +137,7 @@ Reverbify.AudioRecord.start = function() {
       Reverbify.AudioRecord.onStreamError);
 };
 
-Reverbify.AudioRecord.onStream = function(stream) {
+Reverbify.AudioRecord.onStream = function (stream) {
   var mediaStreamSource = Reverbify.AudioCtx.createMediaStreamSource(stream);
 
   console.log('onStream');
@@ -148,6 +148,6 @@ Reverbify.AudioRecord.onStream = function(stream) {
   Reverbify.AudioRecord.recorder.record();
 };
 
-Reverbify.AudioRecord.onStreamError = function(e) {
+Reverbify.AudioRecord.onStreamError = function (e) {
   console.error('Error getting microphone', e);
 };

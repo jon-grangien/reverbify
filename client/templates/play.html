@@ -1,20 +1,20 @@
 <template name="play">
 
-	{{#contentFor "headerButtonLeft"}}
+  {{#contentFor "headerButtonLeft"}}
     {{>ionNavBackButton path="" text="Back"}}
-	{{/contentFor}}
+  {{/contentFor}}
 
-	{{#contentFor "headerTitle"}}
+  {{#contentFor "headerTitle"}}
     <h1 class="title">Play sound</h1>
   {{/contentFor}}
 
   {{#ionView}}
     {{#ionContent}}
-    	<div class="col col-33 col-offset-33">
-    		<button class="button button-energized button-block icon-left ion-play play-button">
-    			Play your sound!
-    		</button>
-    	</div>
+      <div class="col col-33 col-offset-33">
+        <button class="button button-energized button-block icon-left ion-play play-button">
+          Play your sound!
+        </button>
+      </div>
 
     {{/ionContent}}
   {{/ionView}}

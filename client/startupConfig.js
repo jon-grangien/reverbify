@@ -1,12 +1,12 @@
-Template.registerHelper('isIOS', function() {
+Template.registerHelper('isIOS', function () {
   return Platform.isIOS();
 });
-Template.registerHelper('isAndroid', function() {
+Template.registerHelper('isAndroid', function () {
   return Platform.isAndroid();
 });
-Template.registerHelper('isMobile', function() {
+Template.registerHelper('isMobile', function () {
   return Platform.isIOS() || Platform.isAndroid();
 });
-Template.registerHelper('isNotMobile', function() {
+Template.registerHelper('isNotMobile', function () {
   return !(Platform.isIOS() || Platform.isAndroid());
 });

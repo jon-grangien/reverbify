@@ -15,38 +15,38 @@ Template.hello.events({
 
   'click .upload-button': function () {
 
-      var file = document.getElementById('file_input').files[0];
-      if (!file) {
-        Reverbify.updateFeedback('Failed to find audio to upload', false);
-        $('.default-confirmation').show();
-        return;
-      }
+    var file = document.getElementById('file_input').files[0];
+    if (!file) {
+      Reverbify.updateFeedback('Failed to find audio to upload', false);
+      $('.default-confirmation').show();
+      return;
+    }
 
     // Store signal in global object Reverbify
-      var reader = new FileReader();
-      reader.onload = function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
 
-        var contents = e.target.result;
+      var contents = e.target.result;
+      console.log(contents);
+      console.log("Innan");
+      // Convert ArrayBuffer to AudioBuffer, and store it in Reverbify
+      Reverbify.AudioCtx.decodeAudioData(contents, function (buf) {
+
+        Reverbify.Audio.signalBuffer = buf;
         console.log(contents);
-        console.log("Innan");
-        // Convert ArrayBuffer to AudioBuffer, and store it in Reverbify
-        Reverbify.AudioCtx.decodeAudioData(contents, function(buf) {
+        console.log(buf);
+        console.log("Här");
+      });
+      console.log("Där");
+      // alert('Selected audio signal loaded!');
 
-          Reverbify.Audio.signalBuffer = buf;
-          console.log(contents);
-          console.log(buf);
-          console.log("Här");
-        });
-        console.log("Där");
-        // alert('Selected audio signal loaded!');
+      $('.continue-button').removeClass("disabled");
+    };
 
-        $('.continue-button').removeClass("disabled");
-      };
+    Reverbify.updateFeedback('Selected audio loaded!', true);
+    $('.default-confirmation').fadeIn();
 
-      Reverbify.updateFeedback('Selected audio loaded!', true);
-      $('.default-confirmation').fadeIn();
-
-      reader.readAsArrayBuffer(file);
+    reader.readAsArrayBuffer(file);
   },
 
   'click #open-recordview-button': function () {
@@ -89,7 +89,7 @@ Template.hello.events({
 });
 
 Template.hello.helpers({
-  confirmation: function() {
+  confirmation: function () {
     return Session.get('confirmation');
   }
 });
