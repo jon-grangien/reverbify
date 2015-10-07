@@ -1,4 +1,5 @@
 Reverbify = {};
+Reverbify.Audio = {};
 
 /**
  * Convolves the (1D array) signal with the (1D array) kernel and returns the convolved signal.
