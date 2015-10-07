@@ -6,10 +6,10 @@ Template.hello.events({
 
   'click .upload-button': function () {
 
-
       var file = document.getElementById('file_input').files[0];
       if (!file) {
-        alert('Failed to find selected signal!');
+        Reverbify.updateFeedback('Failed to find audio to upload', false);
+        $('.default-confirmation').show();
         return;
       }
 
@@ -29,10 +29,14 @@ Template.hello.events({
           console.log("Här");
         });
         console.log("Där");
-        alert('Selected audio signal loaded!');
+        // alert('Selected audio signal loaded!');
 
         $('.continue-button').removeClass("disabled");
       };
+
+      Reverbify.updateFeedback('Selected audio loaded!', true);
+      $('.default-confirmation').fadeIn();
+
       reader.readAsArrayBuffer(file);
 
   },
@@ -43,12 +47,11 @@ Template.hello.events({
 
   'click .default-audio-button': function () {
     IonLoading.show();
+
     // Load default audio signal
     Reverbify.loadAudio('/audio/default_signal.wav', function (didLoad, audioBuffer) {
       if (!didLoad) {
-        Session.set('confirmation', 'Failed to load audio.');
-        $('.default-confirmation').find('p').removeClass('balanced');
-        $('.default-confirmation').find('p').addClass('assertive');
+        Reverbify.updateFeedback('Failed to load audio!', false);
         $('.default-confirmation').show();
         IonLoading.hide();
         return;
@@ -60,19 +63,8 @@ Template.hello.events({
       // alert('Default audio signal loaded!');
       IonLoading.hide();
 
-      Session.set('confirmation', 'Default audio loaded!');
-      
-      if ($('.default-confirmation').find('p').hasClass('assertive')) {
-        $('.default-confirmation').find('p').removeClass('assertive');
-        $('.default-confirmation').find('p').addClass('balanced');
-      }
-
+      Reverbify.updateFeedback('Default audio loaded!', true);
       $('.default-confirmation').fadeIn("slow");
-
-      // hide after 5 sec
-      // setTimeout(function() {
-      //   $('.default-confirmation').fadeOut("slow");        
-      // }, 5000);
 
       // Store signal and kernel in global object Reverbify
 
