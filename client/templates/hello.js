@@ -43,9 +43,12 @@ Template.hello.events({
   'click .default-audio-button': function () {
     IonLoading.show();
     // Load default audio signal
-    Reverbify.loadAudio('/audio/sowehaveblank.wav', function (didLoad, audioBuffer) {
+    Reverbify.loadAudio('/audio/default_signal.wav', function (didLoad, audioBuffer) {
       if (!didLoad) {
-        alert('Failed to load default signal!');
+        Session.set('confirmation', 'Failed to load audio.');
+        $('.default-confirmation').find('p').removeClass('balanced');
+        $('.default-confirmation').find('p').addClass('assertive');
+        $('.default-confirmation').show();
         IonLoading.hide();
         return;
       }
@@ -55,6 +58,13 @@ Template.hello.events({
 
       // alert('Default audio signal loaded!');
       IonLoading.hide();
+
+      Session.set('confirmation', 'Default audio loaded!');
+      
+      if ($('.default-confirmation').find('p').hasClass('assertive')) {
+        $('.default-confirmation').find('p').removeClass('assertive');
+        $('.default-confirmation').find('p').addClass('balanced');
+      }
 
       $('.default-confirmation').fadeIn("slow");
 
@@ -71,5 +81,11 @@ Template.hello.events({
       $('.continue-button').removeClass('disabled');
     });
 
+  }
+});
+
+Template.hello.helpers({
+  confirmation: function() {
+    return Session.get('confirmation');
   }
 });
