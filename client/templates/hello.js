@@ -4,8 +4,12 @@ Template.hello.events({
   },
 
 
-  'click .upload-button': function () {
+  'click .upload-first': function () {
+    // Enable uploading
+    $('.input-btn').removeClass('hidden');
+  },
 
+  'click .upload-button': function () {
 
       var file = document.getElementById('file_input').files[0];
       if (!file) {
@@ -19,16 +23,15 @@ Template.hello.events({
 
         var contents = e.target.result;
         console.log(contents);
-        console.log("Innan");
+
         // Convert ArrayBuffer to AudioBuffer, and store it in Reverbify
         Reverbify.AudioCtx.decodeAudioData(contents, function(buf) {
 
           Reverbify.Audio.signalBuffer = buf;
           console.log(contents);
           console.log(buf);
-          console.log("Här");
         });
-        console.log("Där");
+
         alert('Selected audio signal loaded!');
 
         $('.continue-button').removeClass("disabled");

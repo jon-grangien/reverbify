@@ -1,4 +1,4 @@
-<template name="hello">
+<template name="hello" xmlns="http://www.w3.org/1999/html">
 
   {{#contentFor "headerTitle"}}
     <h1 class="title">Reverbify</h1>
@@ -10,13 +10,21 @@
       <br><br>
 
       <div class="col col-50 col-offset-25">
-          <input type="file" id="file_input">
-          <button class="button button-calm button-block upload-button">
+          <button class="button button-calm button-block upload-first">
           Upload
         </button>
-          {{#each files}}
-              <p>{{percent_uploaded}}</p>
-          {{/each}}
+      </div>
+      <div class = "row  text-center align-center input-btn hidden">
+        <div class="col-sm-4 " ></div>
+        <div class="col-sm-2 " >
+          <input type="file" id="file_input">
+        </div>
+        <div class="col-sm-3 " >
+          <button class="button button-calm upload-button">
+            Upload selected file
+          </button>
+        </div>
+        <div class="col-sm-3" ></div>
       </div>
 
       <div class="col col-50 col-offset-25">
