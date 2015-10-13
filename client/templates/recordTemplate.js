@@ -1,4 +1,4 @@
-Template.recordAudio.events({
+Template.recordTemplate.events({
   'click .toggle-record-button': function () {
     console.log('click');
 

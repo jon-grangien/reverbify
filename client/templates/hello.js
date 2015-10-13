@@ -4,12 +4,12 @@ function updateCurrentSelection(newSelection) {
   if (currentSelection !== null) {
     currentSelection.addClass('button-outline');
   }
-  if (newSelection !== null){
-      currentSelection = newSelection;
-      currentSelection.removeClass('button-outline');
+  if (newSelection !== null) {
+    currentSelection = newSelection;
+    currentSelection.removeClass('button-outline');
   }
-    else {
-      currentSelection = newSelection;
+  else {
+    currentSelection = newSelection;
   }
 }
 
@@ -19,51 +19,20 @@ Template.hello.events({
   },
 
 
-
   'click .upload-first': function () {
     var btn = $('#open-upload-button');
     updateCurrentSelection(btn);
     // Enable uploading
-    $(function(){
-      if($('.input-btn').hasClass("hidden")){
-        $(".input-btn").removeClass("hidden");  }
-      else {  $(".input-btn").addClass("hidden");
-        updateCurrentSelection(null); }
-      })
+    $(function () {
+      if ($('.input-btn').hasClass("hidden")) {
+        $(".input-btn").removeClass("hidden");
+      }
+      else {
+        $(".input-btn").addClass("hidden");
+        updateCurrentSelection(null);
+      }
+    })
 
-  },
-
-  'click .upload-button': function () {
-
-    var file = document.getElementById('file_input').files[0];
-    if (!file) {
-      Reverbify.updateFeedback('Failed to find audio to upload', false);
-      $('.default-confirmation').show();
-      return;
-    }
-
-    // Store signal in global object Reverbify
-    var reader = new FileReader();
-    reader.onload = function (e) {
-
-      var contents = e.target.result;
-      console.log(contents);
-      // Convert ArrayBuffer to AudioBuffer, and store it in Reverbify
-      Reverbify.AudioCtx.decodeAudioData(contents, function (buf) {
-
-        Reverbify.Audio.signalBuffer = buf;
-        console.log(contents);
-        console.log(buf);
-        });
-
-        $('.continue-button').removeClass("disabled");
-      };
-      reader.readAsArrayBuffer(file);
-
-    Reverbify.updateFeedback('Selected audio loaded!', true);
-    $('.default-confirmation').fadeIn();
-
-    reader.readAsArrayBuffer(file);
   },
 
   'click #open-recordview-button': function () {
@@ -109,5 +78,37 @@ Template.hello.events({
 Template.hello.helpers({
   confirmation: function () {
     return Session.get('confirmation');
-  }
+  },
+  menuItems: [
+    {
+      title: 'Upload',
+      icon: 'ion-ios-upload',
+      hasContent: true,
+      meteorTemplate: 'uploadTemplate'
+    },
+    {
+      title: 'Record',
+      icon: 'ion-mic-a',
+      hasContent: true,
+      meteorTemplate: 'recordTemplate'
+    },
+    {
+      title: 'Use default audio',
+      icon: 'ion-ios-play',
+      hasContent: false,
+      meteorTemplate: 'useDefaultTemplate'
+    }
+  ]
 });
+
+Template.hello.rendered = function () {
+  var accord = $('.ui.accordion');
+
+  accord.accordion({
+    onOpen: function() {
+      var title = $('.title.active')[0];
+
+    }
+  })
+  ;
+};

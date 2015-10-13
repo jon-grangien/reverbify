@@ -11,37 +11,20 @@
       <br><br>
 
       <div class="col col-50 col-offset-25">
-          <button class="button button-outline button-balanced button-block upload-first" id = "open-upload-button">
-          Upload
-        </button>
-      </div>
-      <div class = "row  text-center align-center input-btn hidden">
-        <div class="col-sm-4 " ></div>
-        <div class="col-sm-2 " >
-          <input type="file" id="file_input">
+        <div class="ui styled fluid accordion">
+          {{#each menuItems}}
+            <div class="title">
+              <i class="icon {{icon}}"></i>{{title}}
+            </div>
+            {{#if hasContent}}
+              <div class="content">
+                <div class="transition hidden">
+                  {{> Template.dynamic template=meteorTemplate }}
+                </div>
+              </div>
+            {{/if}}
+          {{/each}}
         </div>
-        <div class="col-sm-3 " >
-          <button class="button button-calm upload-button">
-            Upload selected file
-          </button>
-        </div>
-        <div class="col-sm-3" ></div>
-      </div>
-
-      <div class="col col-50 col-offset-25 mobile-disabled">
-        <button class="button button-outline button-balanced button-block button-select" id="open-recordview-button">
-          Record audio
-        </button>
-      </div>
-
-      {{#if isNotMobile}}
-        {{> recordAudio }}
-      {{/if}}
-
-      <div class="col col-50 col-offset-25">
-        <button class="button button-outline button-balanced button-block button-select" id="default-audio-button">
-          (Use default audio)
-        </button>
       </div>
 
       <!-- default audio confirmation message -->
@@ -54,8 +37,12 @@
       <br><br>
 
       <div class="col col-50 col-offset-25">
+        <button class="button button-energized button-block" id="preview-audio-button">
+          <i class="icon ion-volume-high"></i>    Preview
+        </button>
+        <br>
         <button class="button button-balanced button-block {{continueButtonClass}}" id="continue-button">
-          Next step!
+          Continue
         </button>
       </div>
 
