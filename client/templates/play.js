@@ -101,6 +101,6 @@ Template.play.helpers({
     if(Session.get("isPlaying"))
       return "Pause";
     else
-      return "Play sound";
+      return "Play!";
   }
 });
