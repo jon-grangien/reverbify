@@ -95,6 +95,7 @@ Template.hello.helpers({
     {
       title: 'Use default audio',
       icon: 'ion-ios-play',
+      id: 'default-audio-button',
       hasContent: false,
       meteorTemplate: 'useDefaultTemplate'
     }

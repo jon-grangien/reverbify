@@ -13,7 +13,7 @@
       <div class="col col-50 col-offset-25">
         <div class="ui styled fluid accordion">
           {{#each menuItems}}
-            <div class="title">
+            <div id="{{id}}" class="title">
               <i class="icon {{icon}}"></i>{{title}}
             </div>
             {{#if hasContent}}
@@ -37,8 +37,8 @@
       <br><br>
 
       <div class="col col-50 col-offset-25">
-        <button class="button button-energized button-block icon-left ion-volume-high" id="preview-audio-button" style="color: rgba(50, 50, 50, 0.8);">Preview
-        </button>
+        <!-- <button class="button button-energized button-block icon-left ion-volume-high" id="preview-audio-button" style="color: rgba(50, 50, 50, 0.8);">Preview
+        </button> -->
         <br>
         <button class="button button-balanced button-block {{continueButtonClass}}" id="continue-button">
           Continue
