@@ -7,12 +7,16 @@ Template.recordTemplate.events({
       Reverbify.AudioRecord.stop();
       toggleRecordButton.innerHTML = '<strong>Start</strong>/Stop';
       toggleRecordButton.removeClass('button-assertive').addClass('button-positive');
+
+      Reverbify.updateFeedback('Audio recorded!', true);
+      $('.default-confirmation').fadeIn("slow");
       return;
     }
 
     Reverbify.AudioRecord.start();
     toggleRecordButton.innerHTML = 'Start/<strong>Stop</strong>';
     toggleRecordButton.addClass('button-assertive').removeClass('button-positive');
+
   },
   'click .reset-record-button': function () {
   }
